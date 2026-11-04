@@ -1,28 +1,47 @@
 #include "Background.h"
+
+#include "Screen.h"
+
 namespace flappyBird
 {
 	void updateParallax(ParallaxBackground& bg)
 	{
-		bg.scrollingBack -= 0.1f;
-		bg.scrollingMid -= 0.5f;
-		bg.scrollingFore -= 1.0f;
+		bg.scrollingBack -= 40.0f * GetFrameTime();
+		bg.scrollingMid -= 120.0f * GetFrameTime();
+		bg.scrollingFore -= 250.0f * GetFrameTime();
 
-		// Reiniciar cuando la textura recorra su ancho escalado (x2)
-		if (bg.scrollingBack <= -bg.back.width * 2) bg.scrollingBack = 0;
-		if (bg.scrollingMid <= -bg.mid.width * 2) bg.scrollingMid = 0;
-		if (bg.scrollingFore <= -bg.front.width * 2) bg.scrollingFore = 0;
+		float scale = (float)screenHigh / bg.back.height;
+
+		if (bg.scrollingBack <= -bg.back.width * scale) bg.scrollingBack = 0.0f;
+		if (bg.scrollingMid <= -bg.mid.width * scale) bg.scrollingMid = 0.0f;
+		if (bg.scrollingFore <= -bg.front.width * scale) bg.scrollingFore = 0.0f;
 	}
+
 	void drawParallax(const ParallaxBackground& bg)
 	{
-		DrawTextureEx(bg.back, (Vector2) { bg.scrollingBack, 0 }, 0.0f, 2.0f, WHITE);
-		DrawTextureEx(bg.back, (Vector2) { bg.back.width * 2 + bg.scrollingBack, 0 }, 0.0f, 2.0f, WHITE);
 
-		// Capa media
-		DrawTextureEx(bg.mid, (Vector2) { bg.scrollingMid, 0 }, 0.0f, 2.0f, WHITE);
-		DrawTextureEx(bg.mid, (Vector2) { bg.mid.width * 2 + bg.scrollingMid, 0 }, 0.0f, 2.0f, WHITE);
+		float scale = (float)screenHigh / bg.back.height;
 
-		// Capa frontal
-		DrawTextureEx(bg.front, (Vector2) { bg.scrollingFore, 0 }, 0.0f, 2.0f, WHITE);
-		DrawTextureEx(bg.front, (Vector2) { bg.front.width * 2 + bg.scrollingFore, 0 }, 0.0f, 2.0f, WHITE);
+		float scaledWidthBack = bg.back.width * scale;
+		float scaledWidthMid = bg.mid.width * scale;
+		float scaledWidthFore = bg.front.width * scale;
+
+		DrawTextureEx(bg.back, Vector2{ bg.scrollingBack, 0.0f }, 0.0f, scale, WHITE);
+		DrawTextureEx(bg.back, Vector2{ scaledWidthBack + bg.scrollingBack, 0.0f }, 0.0f, scale, WHITE);
+
+
+		DrawTextureEx(bg.mid, Vector2{ bg.scrollingMid, 0.0f }, 0.0f, scale, WHITE);
+		DrawTextureEx(bg.mid, Vector2{ scaledWidthMid + bg.scrollingMid, 0.0f }, 0.0f, scale, WHITE);
+
+
+		DrawTextureEx(bg.front, Vector2{ bg.scrollingFore, 0.0f }, 0.0f, scale, WHITE);
+		DrawTextureEx(bg.front, Vector2{ scaledWidthFore + bg.scrollingFore, 0.0f }, 0.0f, scale, WHITE);
+	}
+
+	void unloadBackground(ParallaxBackground& bg)
+	{
+		UnloadTexture(bg.back);
+		UnloadTexture(bg.mid);
+		UnloadTexture(bg.front);
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <raylib.h>
+
 namespace flappyBird
 {
 	struct ParallaxBackground
@@ -16,4 +17,5 @@ namespace flappyBird
 
     void updateParallax(ParallaxBackground& bg);
     void drawParallax(const ParallaxBackground& bg);
+    void unloadBackground(ParallaxBackground& bg);
 }

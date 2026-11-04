@@ -17,8 +17,9 @@ namespace flappyBird
 		Player player;
 		bool inGame = true;
 		Obstacle obstacles[MAX_OBSTACLES];
+		ParallaxBackground backGround = { 0 };
 
-		initGame(player, obstacles);
+		initGame(player, obstacles, backGround);
 
 		while (!WindowShouldClose() && inGame)
 		{
@@ -30,8 +31,12 @@ namespace flappyBird
 			}
 			else if (actualScreen == Screen::PLAY)
 			{
+				if (player.isDead)
+				{
+					initGame(player, obstacles, backGround);
+				}
 
-				playGame(player, obstacles, actualScreen);
+				playGame(player, obstacles, actualScreen, backGround);
 			}
 			
 			else if (actualScreen == Screen::CREDITS)
@@ -47,7 +52,7 @@ namespace flappyBird
 			EndDrawing();
 		}
 
-
+		unloadBackground(backGround);
 		CloseWindow();
 	}
 }

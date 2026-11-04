@@ -32,34 +32,48 @@ namespace flappyBird
 		}
 	}
 
-	void initGame(Player& player, Obstacle obstacles[MAX_OBSTACLES])
+	void initGame(Player& player, Obstacle obstacles[MAX_OBSTACLES], ParallaxBackground& bg)
 	{
 		player = initPlayer();
-
 
 		for (int i = 0; i < MAX_OBSTACLES; i++)
 		{
 			obstacles[i] = createObstacles(i);
 		}
+
+
+		if (bg.back.id == 0)
+		{
+			bg.back = LoadTexture("res/back.png");
+		}
+		if (bg.mid.id == 0)
+		{
+			bg.mid = LoadTexture("res/middle.png");
+		}
+		if (bg.front.id == 0)
+		{
+			bg.front = LoadTexture("res/front.png");
+		}
+
+		bg.scrollingBack = 0.0f;
+		bg.scrollingMid = 0.0f;
+		bg.scrollingFore = 0.0f;
 	}
 
-	void playGame(Player& player, Obstacle obstacles[MAX_OBSTACLES], Screen& actualScreen)
+	void playGame(Player& player, Obstacle obstacles[MAX_OBSTACLES], Screen& actualScreen, ParallaxBackground& bg)
 	{
-			movePlayer(player);
-			moveObstacles(obstacles);
-			checkCollision(player, obstacles);
-			checkIfObstacleLevedScreen(obstacles);
-			//checkIfPlayerDied(player, obstacles);
+		movePlayer(player);
+		moveObstacles(obstacles);
+		updateParallax(bg); 
+		checkCollision(player, obstacles);
+		checkIfObstacleLevedScreen(obstacles);
+		checkIfPlayerDied(player, actualScreen);
 
-			if (player.isDead)
-			{
-				actualScreen = Screen::MAIN_MENU;
-			}
+		ClearBackground(BLACK);
 
-			ClearBackground(BLACK);
-
-			drawObstacles(obstacles);
-			drawPlayer(player);
+		drawParallax(bg);     
+		drawObstacles(obstacles);
+		drawPlayer(player);
 
 	}
 
@@ -81,11 +95,11 @@ namespace flappyBird
 		}
 	}
 
-	void checkIfPlayerDied(Player& player, Obstacle obstacles[MAX_OBSTACLES])
+	void checkIfPlayerDied(Player& player, Screen& actualScreen)
 	{
 		if (player.isDead)
 		{
-			initGame(player, obstacles);
+			actualScreen = Screen::MAIN_MENU;
 		}
 	}
 }
