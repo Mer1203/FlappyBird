@@ -26,9 +26,9 @@ namespace flappyBird
 		Pipe pipes[2];
 	};
 
-	Pipe initPipe(float posX);
+	Pipe initPipeTop(float posX);
 
-	Pipe initPipe(float posX, float lastTopPipeHeight);
+	Pipe initPipeBottom(float posX, float lastTopPipeHeight);
 
 	Obstacle createObstacles(int index);
 
