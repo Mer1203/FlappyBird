@@ -4,45 +4,50 @@
 
 namespace flappyBird
 {
-	Pipe initPipe(float posX)
+	Pipe initPipeTop(float posX)
 	{
 		Pipe pipe;
+
 		int screenHeight = GetScreenHeight();
 		int minHeight = screenHeight / 6;
 		int maxHeight = screenHeight / 2;
+
 		pipe.posX = posX;
 		pipe.height = static_cast<float>(minHeight + (rand() % (maxHeight - minHeight)));
 		pipe.posY = 0;
-		pipe.width = 30;
+		pipe.width = 60;
+
 		return pipe;
 	}
 
-	Pipe initPipe(float posX, float lastTopPipeHeight)
+	Pipe initPipeBottom(float posX, float lastTopPipeHeight)
 	{
 		Pipe pipe;
+
 		pipe.posX = posX;
 		pipe.posY = lastTopPipeHeight + PIPE_OFFSET;
 		pipe.height = static_cast<float>(GetScreenHeight()) - pipe.posY;
-		pipe.width = 30;
+		pipe.width = 60;
+
 		return pipe;
 	}
 
 	Obstacle createObstacles(int index)
-	{	
+	{
 		Obstacle obstacles;
 
-			for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 2; i++)
+		{
+			if (i % 2 == 0)
 			{
-				if (i % 2 == 0)
-				{
-					obstacles.pipes[i] = initPipe(startX + (index * OBSTACLE_SPACING));
-				}
-				else
-				{
-					obstacles.pipes[i] = initPipe(startX + (index * OBSTACLE_SPACING),obstacles.pipes[i - 1].height);
-				}
+				obstacles.pipes[i] = initPipeTop(startX + (index * OBSTACLE_SPACING));
 			}
-		
+			else
+			{
+				obstacles.pipes[i] = initPipeBottom(startX + (index * OBSTACLE_SPACING),
+					obstacles.pipes[i - 1].height);
+			}
+		}
 
 		return obstacles;
 	}
@@ -65,7 +70,8 @@ namespace flappyBird
 
 	void drawPipe(Pipe pipe)
 	{
-		DrawRectangle(static_cast<int>(pipe.posX), static_cast<int>(pipe.posY), static_cast<int>(pipe.width), static_cast<int>(pipe.height), RED);
+		DrawRectangle(static_cast<int>(pipe.posX), static_cast<int>(pipe.posY),
+			static_cast<int>(pipe.width), static_cast<int>(pipe.height), RED);
 	}
 
 	void drawObstacles(Obstacle obstacles[MAX_OBSTACLES])
