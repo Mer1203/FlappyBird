@@ -15,7 +15,7 @@ namespace flappyBird
         float scrollingFore;
 	};
 
-    void updateParallax(ParallaxBackground& bg);
-    void drawParallax(const ParallaxBackground& bg);
-    void unloadBackground(ParallaxBackground& bg);
+    void updateParallax(ParallaxBackground& background);
+    void drawParallax(ParallaxBackground& background);
+    void unloadBackground(ParallaxBackground& background);
 }
