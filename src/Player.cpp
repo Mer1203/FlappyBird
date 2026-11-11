@@ -15,7 +15,7 @@ namespace flappyBird
 		playerOne.velY = PLAYER_SPEED;
 		playerOne.width = 40;
 		playerOne.height = 40;
-		playerOne.jumpForce = -200.0f;
+		playerOne.jumpForce = 300.0f;
 		playerOne.verticalVel = 0.0f;
 		playerOne.isDead = false;
 
@@ -31,7 +31,7 @@ namespace flappyBird
 		playerTwo.velY = PLAYER_SPEED;
 		playerTwo.width = 40;
 		playerTwo.height = 40;
-		playerTwo.jumpForce = -200.0f;
+		playerTwo.jumpForce = 300.0f;
 		playerTwo.verticalVel = 0.0f;
 		playerTwo.isDead = false;
 

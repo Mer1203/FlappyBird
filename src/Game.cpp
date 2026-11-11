@@ -1,18 +1,18 @@
 #include "Game.h"
 #include <raylib.h>
 #include "Screen.h"
+
 namespace flappyBird
 {
-
 	void checkCollision(Player& player, Pipe& pipe)
 	{
-		if (player.posX + player.width >= (pipe.posX) && player.posX <= (pipe.posX + pipe.width))
+		if (player.posX + player.width >= (pipe.posX) && 
+			player.posX <= (pipe.posX + pipe.width))
 		{
-			if (player.posY + player.height >= (pipe.posY) && player.posY <= (pipe.posY + pipe.height))
+			if (player.posY + player.height >= (pipe.posY) && 
+				player.posY <= (pipe.posY + pipe.height))
 			{
-
 				player.isDead = true;
-
 			}
 		}
 		else if (player.posY + player.height > GetScreenHeight())
@@ -32,49 +32,50 @@ namespace flappyBird
 		}
 	}
 
-	void initGame(Player& player, Obstacle obstacles[MAX_OBSTACLES], ParallaxBackground& bg)
+	void initGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
+		ParallaxBackground& background)
 	{
-		player = initPlayer();
+		playerOne = initPlayerOne();
+		playerTwo = initPlayerTwo();
 
 		for (int i = 0; i < MAX_OBSTACLES; i++)
 		{
 			obstacles[i] = createObstacles(i);
 		}
 
+		if (background.back.id == 0)
+		{
+			background.back = LoadTexture("res/back.png");
+		}
+		if (background.mid.id == 0)
+		{
+			background.mid = LoadTexture("res/middle.png");
+		}
+		if (background.front.id == 0)
+		{
+			background.front = LoadTexture("res/front.png");
+		}
 
-		if (bg.back.id == 0)
-		{
-			bg.back = LoadTexture("res/back.png");
-		}
-		if (bg.mid.id == 0)
-		{
-			bg.mid = LoadTexture("res/middle.png");
-		}
-		if (bg.front.id == 0)
-		{
-			bg.front = LoadTexture("res/front.png");
-		}
-
-		bg.scrollingBack = 0.0f;
-		bg.scrollingMid = 0.0f;
-		bg.scrollingFore = 0.0f;
+		background.scrollingBack = 0.0f;
+		background.scrollingMid = 0.0f;
+		background.scrollingFore = 0.0f;
 	}
 
-	void playGame(Player& player, Obstacle obstacles[MAX_OBSTACLES], Screen& actualScreen, ParallaxBackground& bg)
+	void playGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES], 
+		Screen& actualScreen, ParallaxBackground& background)
 	{
-		movePlayer(player);
+		movePlayer(playerOne, playerTwo);
 		moveObstacles(obstacles);
-		updateParallax(bg); 
-		checkCollision(player, obstacles);
+		updateParallax(background);
+		checkCollision(playerOne, obstacles);
 		checkIfObstacleLevedScreen(obstacles);
-		checkIfPlayerDied(player, actualScreen);
+		checkIfPlayerDied(playerOne, actualScreen);
 
 		ClearBackground(BLACK);
 
-		drawParallax(bg);     
+		drawParallax(background);
 		drawObstacles(obstacles);
-		drawPlayer(player);
-
+		drawPlayer(playerOne);
 	}
 
 	void checkIfObstacleLevedScreen(Obstacle& obstacle)
@@ -83,8 +84,8 @@ namespace flappyBird
 		if (obstacle.pipes[0].posX + obstacle.pipes[0].width < 0)
 		{
 			newPosX = obstacle.pipes[0].posX + (MAX_OBSTACLES * OBSTACLE_SPACING);
-			obstacle.pipes[0] = initPipe(newPosX);
-			obstacle.pipes[1] = initPipe(newPosX, obstacle.pipes[0].height);
+			obstacle.pipes[0] = initPipeTop(newPosX);
+			obstacle.pipes[1] = initPipeBottom(newPosX, obstacle.pipes[0].height);
 		}
 	}
 	void checkIfObstacleLevedScreen(Obstacle obstacles[MAX_OBSTACLES])

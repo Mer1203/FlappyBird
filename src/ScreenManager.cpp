@@ -6,20 +6,19 @@
 #include "Credits.h"
 #include "Game.h"
 
-
 namespace flappyBird
 {
-
 	void showScreen()
 	{
 		InitWindow(1024, 768, "Floppy:El Pajaro que Vuela Remaster Editon");
 		Screen actualScreen = Screen::MAIN_MENU;
-		Player player;
+		Player playerOne;
+		Player playerTwo;
 		bool inGame = true;
 		Obstacle obstacles[MAX_OBSTACLES];
 		ParallaxBackground backGround = { 0 };
 
-		initGame(player, obstacles, backGround);
+		initGame(playerOne, playerTwo, obstacles, backGround);
 
 		while (!WindowShouldClose() && inGame)
 		{
@@ -31,14 +30,13 @@ namespace flappyBird
 			}
 			else if (actualScreen == Screen::PLAY)
 			{
-				if (player.isDead)
+				if (playerOne.isDead)
 				{
-					initGame(player, obstacles, backGround);
+					initGame(playerOne, playerTwo, obstacles, backGround);
 				}
 
-				playGame(player, obstacles, actualScreen, backGround);
+				playGame(playerOne, playerTwo, obstacles, actualScreen, backGround);
 			}
-			
 			else if (actualScreen == Screen::CREDITS)
 			{
 				ClearBackground(BLACK);
