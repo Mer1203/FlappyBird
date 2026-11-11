@@ -68,8 +68,10 @@ namespace flappyBird
 		moveObstacles(obstacles);
 		updateParallax(background);
 		checkCollision(playerOne, obstacles);
+		checkCollision(playerTwo, obstacles);
 		checkIfObstacleLevedScreen(obstacles);
 		checkIfPlayerDied(playerOne, actualScreen);
+		checkIfPlayerDied(playerTwo, actualScreen);
 
 		ClearBackground(BLACK);
 

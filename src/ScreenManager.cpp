@@ -30,7 +30,7 @@ namespace flappyBird
 			}
 			else if (actualScreen == Screen::PLAY)
 			{
-				if (playerOne.isDead)
+				if (playerOne.isDead || playerTwo.isDead)
 				{
 					initGame(playerOne, playerTwo, obstacles, backGround);
 				}
