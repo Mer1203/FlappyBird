@@ -36,21 +36,21 @@ namespace flappyBird
         playButton.high = 50;
         playButton.x = static_cast<int>(sw / 2.0f - playButton.width / 2.0f);
         playButton.y = static_cast<int>(sh / 3.0f);
-        playButton.text = "JUGAR";
+        playButton.text = "PLAY";
 
 
         creditsButton.width = 200;
         creditsButton.high = 50;
         creditsButton.x = static_cast<int>(sw / 2.0f - creditsButton.width / 2.0f);
         creditsButton.y = static_cast<int>(playButton.y + playButton.high + buttonsOffset);
-        creditsButton.text = "CREDITOS";
+        creditsButton.text = "CREDITS";
 
 
         exitButton.width = 200;
         exitButton.high = 50;
         exitButton.x = static_cast<int>(sw / 2.0f - exitButton.width / 2.0f);
         exitButton.y = static_cast<int>(creditsButton.y + creditsButton.high + buttonsOffset);
-        exitButton.text = "SALIR";
+        exitButton.text = "EXIT";
 
 
         if (onClick(playButton))
@@ -114,6 +114,6 @@ namespace flappyBird
         DrawTextEx(defaultFont, title, { titleX, titleY }, titleFontSize, spacing, RED);
         DrawTextEx(defaultFont, title2, { title2X, title2Y }, title2FontSize, spacing, YELLOW);
 
-        DrawText("v0.2", 20, 20, 30, WHITE);
+        DrawText("v0.4", 20, 20, 30, WHITE);
     }
 }
