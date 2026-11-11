@@ -6,57 +6,81 @@
 
 namespace flappyBird
 {
-	const float gravity = 800.0f;
-	Player initPlayer()
+	Player initPlayerOne()
 	{
-		Player player;
-		player.posX = 100;
-		player.posY = 200;
-		player.velY = PLAYER_SPEED;
-		player.width = 40;
-		player.height = 40;
-		player.jumpForce = 300.0f;
-		player.verticalVel = 0.0f;
-		player.isDead = false;
-		return player;
+		Player playerOne;
+
+		playerOne.posX = 100;
+		playerOne.posY = 200;
+		playerOne.velY = PLAYER_SPEED;
+		playerOne.width = 40;
+		playerOne.height = 40;
+		playerOne.jumpForce = -200.0f;
+		playerOne.verticalVel = 0.0f;
+		playerOne.isDead = false;
+
+		return playerOne;
 	}
-	void movePlayer(Player& player)
+
+	Player initPlayerTwo()
+	{
+		Player playerTwo;
+
+		playerTwo.posX = 100;
+		playerTwo.posY = 200;
+		playerTwo.velY = PLAYER_SPEED;
+		playerTwo.width = 40;
+		playerTwo.height = 40;
+		playerTwo.jumpForce = -200.0f;
+		playerTwo.verticalVel = 0.0f;
+		playerTwo.isDead = false;
+
+		return playerTwo;
+	}
+
+	void movePlayer(Player& playerOne, Player& playerTwo)
 	{
 		float aux;
+
 		if (IsKeyPressed(KEY_SPACE))
 		{ 
-			if (player.verticalVel < -player.jumpForce)
+			if (playerOne.verticalVel < -playerOne.jumpForce)
 			{
-				player.verticalVel = -player.jumpForce;
+				playerOne.verticalVel = -playerOne.jumpForce;
 			}
-			player.verticalVel -= player.jumpForce;
+			
+			if (playerTwo.verticalVel < -playerTwo.jumpForce)
+			{
+				playerTwo.verticalVel = -playerTwo.jumpForce;
+			}
 
+			playerOne.verticalVel -= playerOne.jumpForce;
+			playerTwo.verticalVel -= playerTwo.jumpForce;
 		}
 		else
 		{
-			
-			if (player.verticalVel > 350)
+			if (playerOne.verticalVel > 350)
 			{
-				player.verticalVel = 350;
+				playerOne.verticalVel = 350;
 			}
 			
-			player.verticalVel += gravity * GetFrameTime();
-			player.posY += (player.verticalVel) * GetFrameTime();
-			aux = player.verticalVel;
-			std::cout << player.verticalVel << std::endl;
+			playerOne.verticalVel += gravity * GetFrameTime();
+			playerOne.posY += (playerOne.verticalVel) * GetFrameTime();
+
+			aux = playerOne.verticalVel;
+
+			std::cout << playerOne.verticalVel << std::endl;
 		}
 
-	
-	
-
-
-		if (player.posY < 0)
+		if (playerOne.posY < 0)
 		{
-			player.posY = 0;
+			playerOne.posY = 0;
 		}
 	}
+
 	void drawPlayer(Player player)
 	{
-		DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), static_cast<int>(player.width), static_cast<int>(player.height), BLUE);
+		DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY),
+			static_cast<int>(player.width), static_cast<int>(player.height), BLUE);
 	}
 }

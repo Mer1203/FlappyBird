@@ -2,6 +2,7 @@
 namespace flappyBird
 {
 	const float PLAYER_SPEED = 100;
+
 	struct Player
 	{
 		float posX;
@@ -14,7 +15,10 @@ namespace flappyBird
 		bool isDead;
 	};
 
-	Player initPlayer();
-	void movePlayer(Player& player);
+	const float gravity = 800.0f;
+
+	Player initPlayerOne();
+	Player initPlayerTwo();
+	void movePlayer(Player& player, Player& playerTwo);
 	void drawPlayer(Player player);
 }
