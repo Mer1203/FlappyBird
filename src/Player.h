@@ -1,8 +1,7 @@
 #pragma once
+#include <raylib.h>
 namespace flappyBird
 {
-	const float PLAYER_SPEED = 100;
-
 	struct Player
 	{
 		float posX;
@@ -11,14 +10,16 @@ namespace flappyBird
 		float height;
 		float velY;
 		float jumpForce;
-		float verticalVel;
+		float velocity;
 		bool isDead;
 	};
 
-	const float gravity = 800.0f;
+	const float gravity = 600.0f;
+	const float VELOCITY_LIMIT = 280.0f;
 
 	Player initPlayerOne();
 	Player initPlayerTwo();
-	void movePlayer(Player& player, Player& playerTwo);
-	void drawPlayer(Player player);
+	void updatePlayer(Player& player, Player& playerTwo);
+	void playerMovement(Player& player, KeyboardKey key);
+	void drawPlayer(Player player, Player playerTwo);
 }

@@ -64,7 +64,7 @@ namespace flappyBird
 	void playGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES], 
 		Screen& actualScreen, ParallaxBackground& background)
 	{
-		movePlayer(playerOne, playerTwo);
+		updatePlayer(playerOne, playerTwo);
 		moveObstacles(obstacles);
 		updateParallax(background);
 		checkCollision(playerOne, obstacles);
@@ -75,7 +75,7 @@ namespace flappyBird
 
 		drawParallax(background);
 		drawObstacles(obstacles);
-		drawPlayer(playerOne);
+		drawPlayer(playerOne, playerTwo);
 	}
 
 	void checkIfObstacleLevedScreen(Obstacle& obstacle)
