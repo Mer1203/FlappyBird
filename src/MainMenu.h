@@ -3,5 +3,5 @@
 #include <raylib.h>
 namespace flappyBird
 {
-	void showMainMenu(Screen& actualScreen);
+	void showMainMenu(Screen& actualScreen, Music menuMusic);
 }

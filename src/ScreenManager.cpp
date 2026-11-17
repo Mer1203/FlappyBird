@@ -11,12 +11,17 @@ namespace flappyBird
 	void showScreen()
 	{
 		InitWindow(1024, 768, "Floppy:El Pajaro que Vuela Remaster Editon");
+		InitAudioDevice();
+
 		Screen actualScreen = Screen::MAIN_MENU;
 		Player playerOne;
 		Player playerTwo;
 		bool inGame = true;
 		Obstacle obstacles[MAX_OBSTACLES];
 		ParallaxBackground backGround = { 0 };
+
+		//MUSICA:
+		Music menuMusic = LoadMusicStream("res/Sounds/musica-elevador-short.mp3");
 
 		initGame(playerOne, playerTwo, obstacles, backGround);
 
@@ -26,7 +31,7 @@ namespace flappyBird
 			if (actualScreen == Screen::MAIN_MENU)
 			{
 				ClearBackground(BLACK);
-				showMainMenu(actualScreen);
+				showMainMenu(actualScreen, menuMusic);
 			}
 			else if (actualScreen == Screen::PLAY)
 			{
@@ -50,7 +55,11 @@ namespace flappyBird
 			EndDrawing();
 		}
 
+		CloseAudioDevice();
+		UnloadMusicStream(menuMusic);
 		unloadBackground(backGround);
+		UnloadTexture(playerOne.Bird);
+		UnloadTexture(playerTwo.Bird);
 		CloseWindow();
 	}
 }

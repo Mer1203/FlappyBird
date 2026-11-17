@@ -4,7 +4,7 @@
 
 namespace flappyBird
 {
-    void showMainMenu(Screen& actualScreen)
+    void showMainMenu(Screen& actualScreen, Music menuMusic)
     {
         // 1. Obtener la fuente por defecto de Raylib
         Font defaultFont = GetFontDefault();
@@ -17,6 +17,14 @@ namespace flappyBird
         float sw = static_cast<float>(GetScreenWidth());
         float sh = static_cast<float>(GetScreenHeight());
 
+        if (!IsMusicStreamPlaying(menuMusic))
+        {
+            PlayMusicStream(menuMusic);
+        }
+        else
+        {
+            UpdateMusicStream(menuMusic);
+        }
 
         const char* title = "FLOPPY: EL PAJARO QUE VUELA";
         const char* title2 = "REMASTER EDITION";
@@ -38,13 +46,11 @@ namespace flappyBird
         playButton.y = static_cast<int>(sh / 3.0f);
         playButton.text = "PLAY";
 
-
         creditsButton.width = 200;
         creditsButton.high = 50;
         creditsButton.x = static_cast<int>(sw / 2.0f - creditsButton.width / 2.0f);
         creditsButton.y = static_cast<int>(playButton.y + playButton.high + buttonsOffset);
         creditsButton.text = "CREDITS";
-
 
         exitButton.width = 200;
         exitButton.high = 50;
