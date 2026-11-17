@@ -10,13 +10,14 @@ namespace flappyBird
 	{
 		Player playerOne;
 
-		playerOne.posX = 100;
-		playerOne.posY = 200;
-		playerOne.width = 40;
-		playerOne.height = 40;
+		playerOne.position.x = 100;
+		playerOne.position.y = 200;
+		playerOne.size.x = 40;
+		playerOne.size.y = 40;
 		playerOne.jumpForce = 300.0f;
 		playerOne.velocity = 0.0f;
 		playerOne.isDead = false;
+		playerOne.Bird = LoadTexture("res/Bird1.png");
 
 		return playerOne;
 	}
@@ -25,13 +26,14 @@ namespace flappyBird
 	{
 		Player playerTwo;
 
-		playerTwo.posX = 100;
-		playerTwo.posY = 200;
-		playerTwo.width = 40;
-		playerTwo.height = 40;
+		playerTwo.position.x = 100;
+		playerTwo.position.y = 200;
+		playerTwo.size.x = 40;
+		playerTwo.size.y = 40;
 		playerTwo.jumpForce = 300.0f;
 		playerTwo.velocity = 0.0f;
 		playerTwo.isDead = false;
+		playerTwo.Bird = LoadTexture("res/Bird2.png");
 
 		return playerTwo;
 	}
@@ -44,11 +46,16 @@ namespace flappyBird
 
 	void drawPlayer(Player playerOne, Player playerTwo)
 	{
-		DrawRectangle(static_cast<int>(playerOne.posX), static_cast<int>(playerOne.posY),
-			static_cast<int>(playerOne.width), static_cast<int>(playerOne.height), BLUE);
+		Vector2 drawPositionOne = {playerOne.position.x - 40, playerOne.position.y - 40};
+		Vector2 drawPositionTwo = { playerTwo.position.x - 40, playerTwo.position.y - 40};
 
-		DrawRectangle(static_cast<int>(playerTwo.posX), static_cast<int>(playerTwo.posY),
-			static_cast<int>(playerTwo.width), static_cast<int>(playerTwo.height), VIOLET);
+		DrawTextureEx(playerOne.Bird, drawPositionOne, 0, 0.1f, WHITE);
+		DrawTextureEx(playerTwo.Bird, drawPositionTwo, 0, 0.1f, WHITE);
+
+#ifdef _DEBUG
+		DrawRectangleV(playerOne.position, playerOne.size, BLUE);
+		DrawRectangleV(playerTwo.position, playerTwo.size, VIOLET);
+#endif
 	}
 
 	void playerMovement(Player& player, KeyboardKey key)
@@ -70,12 +77,12 @@ namespace flappyBird
 			}
 
 			player.velocity += gravity * GetFrameTime();
-			player.posY += (player.velocity) * GetFrameTime();
+			player.position.y += (player.velocity) * GetFrameTime();
 		}
 
-		if (player.posY < 0)
+		if (player.position.y < 0)
 		{
-			player.posY = 0;
+			player.position.y = 0;
 			player.velocity = 0;
 		}
 	}

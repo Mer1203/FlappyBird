@@ -4,14 +4,13 @@ namespace flappyBird
 {
 	struct Player
 	{
-		float posX;
-		float posY;
-		float width;
-		float height;
+		Vector2 position;
+		Vector2 size;
 		float velY;
 		float jumpForce;
 		float velocity;
 		bool isDead;
+		Texture2D Bird;
 	};
 
 	const float gravity = 600.0f;

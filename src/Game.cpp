@@ -6,16 +6,16 @@ namespace flappyBird
 {
 	void checkCollision(Player& player, Pipe& pipe)
 	{
-		if (player.posX + player.width >= (pipe.posX) && 
-			player.posX <= (pipe.posX + pipe.width))
+		if (player.position.x + player.size.x >= (pipe.position.x) &&
+			player.position.x <= (pipe.position.x + pipe.size.x))
 		{
-			if (player.posY + player.height >= (pipe.posY) && 
-				player.posY <= (pipe.posY + pipe.height))
+			if (player.position.y + player.size.y >= (pipe.position.y) &&
+				player.position.y <= (pipe.position.y + pipe.size.y))
 			{
 				player.isDead = true;
 			}
 		}
-		else if (player.posY + player.height > GetScreenHeight())
+		else if (player.position.y + player.size.y > GetScreenHeight())
 		{
 			player.isDead = true;
 		}
@@ -83,11 +83,11 @@ namespace flappyBird
 	void checkIfObstacleLevedScreen(Obstacle& obstacle)
 	{
 		float newPosX;
-		if (obstacle.pipes[0].posX + obstacle.pipes[0].width < 0)
+		if (obstacle.pipes[0].position.x + obstacle.pipes[0].size.x < 0)
 		{
-			newPosX = obstacle.pipes[0].posX + (MAX_OBSTACLES * OBSTACLE_SPACING);
+			newPosX = obstacle.pipes[0].position.x + (MAX_OBSTACLES * OBSTACLE_SPACING);
 			obstacle.pipes[0] = initPipeTop(newPosX);
-			obstacle.pipes[1] = initPipeBottom(newPosX, obstacle.pipes[0].height);
+			obstacle.pipes[1] = initPipeBottom(newPosX, obstacle.pipes[0].position.y);
 		}
 	}
 	void checkIfObstacleLevedScreen(Obstacle obstacles[MAX_OBSTACLES])
