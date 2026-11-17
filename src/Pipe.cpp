@@ -12,10 +12,11 @@ namespace flappyBird
 		int minHeight = screenHeight / 6;
 		int maxHeight = screenHeight / 2;
 
-		pipe.posX = posX;
-		pipe.height = static_cast<float>(minHeight + (rand() % (maxHeight - minHeight)));
-		pipe.posY = 0;
-		pipe.width = 60;
+		pipe.position.x = posX;
+		pipe.size.y = static_cast<float>(minHeight + (rand() % (maxHeight - minHeight)));
+		pipe.position.y = 0;
+		pipe.size.x = 80;
+		//pipe.pipe = LoadTexture("res/Pipe.png");
 
 		return pipe;
 	}
@@ -24,10 +25,11 @@ namespace flappyBird
 	{
 		Pipe pipe;
 
-		pipe.posX = posX;
-		pipe.posY = lastTopPipeHeight + PIPE_OFFSET;
-		pipe.height = static_cast<float>(GetScreenHeight()) - pipe.posY;
-		pipe.width = 60;
+		pipe.position.x = posX;
+		pipe.position.y = lastTopPipeHeight + PIPE_OFFSET;
+		pipe.size.y = static_cast<float>(GetScreenHeight()) - pipe.position.y;
+		pipe.size.x = 80;
+		//pipe.pipe = LoadTexture("res/Pipe.png");
 
 		return pipe;
 	}
@@ -45,7 +47,7 @@ namespace flappyBird
 			else
 			{
 				obstacles.pipes[i] = initPipeBottom(startX + (index * OBSTACLE_SPACING),
-					obstacles.pipes[i - 1].height);
+					obstacles.pipes[i - 1].size.y);
 			}
 		}
 
@@ -54,7 +56,7 @@ namespace flappyBird
 
 	void movePipe(Pipe& pipe)
 	{
-		pipe.posX -= (PIPE_VEL)*GetFrameTime();
+		pipe.position.x -= (PIPE_VEL)*GetFrameTime();
 	}
 
 	void moveObstacles(Obstacle obstacles[MAX_OBSTACLES])
@@ -70,8 +72,12 @@ namespace flappyBird
 
 	void drawPipe(Pipe pipe)
 	{
-		DrawRectangle(static_cast<int>(pipe.posX), static_cast<int>(pipe.posY),
-			static_cast<int>(pipe.width), static_cast<int>(pipe.height), RED);
+#ifdef _DEBUG
+		DrawRectangleV(pipe.position, pipe.size, ORANGE);
+#endif
+		/*Vector2 drawPosition = { pipe.position.x - 120, pipe.position.y - 100 };
+
+		DrawTextureEx(pipe.pipe, drawPosition, 0, 0.5f, WHITE);*/
 	}
 
 	void drawObstacles(Obstacle obstacles[MAX_OBSTACLES])

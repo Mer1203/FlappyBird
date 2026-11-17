@@ -15,11 +15,9 @@ namespace flappyBird
 		+ PIPE_SPAWN_OFFSET);
 	struct Pipe
 	{
-		float posX;
-		float posY;
-		float width;
-		float height;
-
+		Vector2 position;
+		Vector2 size;
+		//Texture2D pipe;
 	};
 
 	struct Obstacle
