@@ -7,10 +7,8 @@ namespace flappyBird
 	void showMainMenu(Screen& actualScreen, Music menuMusic, 
 		Sound playButtonSound, Sound rulesButtonSound, Sound creditsButtonSound)
 	{
-		// 1. Obtener la fuente por defecto de Raylib
 		Font defaultFont = GetFontDefault();
 
-		// 2. Configuración de botones
 		Button playButton;
 		Button creditsButton;
 		Button rulesButton;
@@ -83,7 +81,7 @@ namespace flappyBird
 		}
 		else if (onClick(rulesButton))
 		{
-			actualScreen = Screen::CREDITS;
+			actualScreen = Screen::RULES;
 
 			if (!rulesButton.isSoundPlaying)
 			{

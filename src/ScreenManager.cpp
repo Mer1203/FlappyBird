@@ -5,6 +5,7 @@
 #include "MainMenu.h"
 #include "Credits.h"
 #include "Game.h"
+#include "Rules.h"
 
 namespace flappyBird
 {
@@ -22,6 +23,7 @@ namespace flappyBird
 
 		//MUSICA:
 		Music menuMusic = LoadMusicStream("res/Sounds/musica-elevador-short.mp3");
+		Music gameplayMusic = LoadMusicStream("res/Sounds/po-pi-po-2.mp3");
 
 		//SONIDO:
 		Sound playButtonSound = LoadSound("res/Sounds/mercadopago-transferencia-ok.mp3");
@@ -59,7 +61,7 @@ namespace flappyBird
 			else if (actualScreen == Screen::RULES)
 			{
 				ClearBackground(BLACK);
-				showCredits(actualScreen);
+				showRules(actualScreen);
 			}
 			else if (actualScreen == Screen::EXIT)
 			{
