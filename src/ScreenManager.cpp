@@ -23,15 +23,21 @@ namespace flappyBird
 		//MUSICA:
 		Music menuMusic = LoadMusicStream("res/Sounds/musica-elevador-short.mp3");
 
+		//SONIDO:
+		Sound playButtonSound = LoadSound("res/Sounds/mercadopago-transferencia-ok.mp3");
+
 		initGame(playerOne, playerTwo, obstacles, backGround);
 
 		while (!WindowShouldClose() && inGame)
 		{
+			SetMasterVolume(0.5f);
+
 			BeginDrawing();
 			if (actualScreen == Screen::MAIN_MENU)
 			{
 				ClearBackground(BLACK);
-				showMainMenu(actualScreen, menuMusic);
+				showMainMenu(actualScreen, menuMusic, playButtonSound);
+
 			}
 			else if (actualScreen == Screen::PLAY)
 			{
