@@ -25,18 +25,19 @@ namespace flappyBird
 
 		//SONIDO:
 		Sound playButtonSound = LoadSound("res/Sounds/mercadopago-transferencia-ok.mp3");
+		Sound creditButtonSound = LoadSound("res/Sounds/discord-user-joined-sound-effect.mp3");
 
 		initGame(playerOne, playerTwo, obstacles, backGround);
 
 		while (!WindowShouldClose() && inGame)
 		{
-			SetMasterVolume(0.5f);
+			SetMasterVolume(0.3f);
 
 			BeginDrawing();
 			if (actualScreen == Screen::MAIN_MENU)
 			{
 				ClearBackground(BLACK);
-				showMainMenu(actualScreen, menuMusic, playButtonSound);
+				showMainMenu(actualScreen, menuMusic, playButtonSound, creditButtonSound);
 
 			}
 			else if (actualScreen == Screen::PLAY)
