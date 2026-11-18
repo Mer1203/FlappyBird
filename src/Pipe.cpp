@@ -72,9 +72,7 @@ namespace flappyBird
 
 	void drawPipe(Pipe pipe)
 	{
-#ifdef _DEBUG
 		DrawRectangleV(pipe.position, pipe.size, ORANGE);
-#endif
 		/*Vector2 drawPosition = { pipe.position.x - 120, pipe.position.y - 100 };
 
 		DrawTextureEx(pipe.pipe, drawPosition, 0, 0.5f, WHITE);*/
