@@ -26,6 +26,7 @@
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\Pipe.h" />
     <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\Rules.h" />
     <ClInclude Include="src\Screen.h" />
     <ClInclude Include="src\ScreenManager.h" />
   </ItemGroup>
@@ -38,6 +39,7 @@
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Pipe.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Rules.cpp" />
     <ClCompile Include="src\ScreenManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
