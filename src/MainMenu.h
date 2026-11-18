@@ -4,5 +4,6 @@
 namespace flappyBird
 {
 	void showMainMenu(Screen& actualScreen, Music menuMusic, 
-		Sound playButtonSound, Sound creditButtonSound);
+		Sound playButtonSound, Sound rulesButtonSound, 
+		Sound creditsButtonSound);
 }
