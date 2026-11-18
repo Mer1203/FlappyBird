@@ -33,10 +33,20 @@ namespace flappyBird
 	}
 
 	void initGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-		ParallaxBackground& background)
+		ParallaxBackground& background, Music gameplayMusic)
 	{
 		playerOne = initPlayerOne();
 		playerTwo = initPlayerTwo();
+
+		if (!IsMusicStreamPlaying(gameplayMusic))
+		{
+			SetMusicVolume(gameplayMusic, 1.0f);
+			PlayMusicStream(gameplayMusic);
+		}
+		else
+		{
+			UpdateMusicStream(gameplayMusic);
+		}
 
 		for (int i = 0; i < MAX_OBSTACLES; i++)
 		{

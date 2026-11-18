@@ -30,7 +30,7 @@ namespace flappyBird
 		Sound creditsButtonSound = LoadSound("res/Sounds/anime-wow-sound-effect.mp3");
 		Sound rulesButtonSound = LoadSound("res/Sounds/discord-user-joined-sound-effect.mp3");
 
-		initGame(playerOne, playerTwo, obstacles, backGround);
+		initGame(playerOne, playerTwo, obstacles, backGround, gameplayMusic);
 
 		while (!WindowShouldClose() && inGame)
 		{
@@ -48,7 +48,7 @@ namespace flappyBird
 			{
 				if (playerOne.isDead || playerTwo.isDead)
 				{
-					initGame(playerOne, playerTwo, obstacles, backGround);
+					initGame(playerOne, playerTwo, obstacles, backGround, gameplayMusic);
 				}
 
 				playGame(playerOne, playerTwo, obstacles, actualScreen, backGround);
@@ -73,6 +73,7 @@ namespace flappyBird
 
 		CloseAudioDevice();
 		UnloadMusicStream(menuMusic);
+		UnloadMusicStream(gameplayMusic);
 		unloadBackground(backGround);
 		UnloadTexture(playerOne.Bird);
 		UnloadTexture(playerTwo.Bird);
