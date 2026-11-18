@@ -120,7 +120,7 @@ namespace flappyBird
 		Vector2 rulesTextSize = MeasureTextEx(defaultFont, rulesButton.text.c_str(), buttonFontSize, spacing);
 		DrawTextEx(
 			defaultFont,
-			exitButton.text.c_str(),
+			rulesButton.text.c_str(),
 			{
 				static_cast<float>(rulesButton.x) + (rulesButton.width - rulesTextSize.x) / 2.0f,
 				static_cast<float>(rulesButton.y) + (rulesButton.high - rulesTextSize.y) / 2.0f
