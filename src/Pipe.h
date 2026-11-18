@@ -12,8 +12,7 @@ namespace flappyBird
 	const int MAX_OBSTACLES = 30;
 	const float OBSTACLE_SPACING = 450.0f;
 	const int PIPE_OFFSET = 140;
-	const float startX = static_cast<float>(GetScreenWidth() 
-		+ PIPE_SPAWN_OFFSET);
+	const float startX = 1024;
 	struct Pipe
 	{
 		Vector2 position;
