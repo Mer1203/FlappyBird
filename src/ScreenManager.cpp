@@ -17,9 +17,13 @@ namespace flappyBird
 		InitAudioDevice();
 
 		Screen actualScreen = Screen::MENU;
-		Player playerOne;
-		Player playerTwo;
+		Player playerOne = {};
+		Player playerTwo = {};
+
 		bool inGame = true;
+		bool isMultiplayer = false;
+		bool gameNeedsInit = true;
+
 		Obstacle obstacles[MAX_OBSTACLES];
 		ParallaxBackground backGround = { 0 };
 		Texture2D blackBackground = LoadTexture("res/Black_Background.png");
@@ -33,7 +37,7 @@ namespace flappyBird
 		Sound creditsButtonSound = LoadSound("res/Sounds/anime-wow-sound-effect.mp3");
 		Sound rulesButtonSound = LoadSound("res/Sounds/discord-user-joined-sound-effect.mp3");
 
-		initGame(playerOne, playerTwo, obstacles, backGround);
+		initGame(playerOne, playerTwo, obstacles, backGround, isMultiplayer);
 
 		while (!WindowShouldClose() && inGame)
 		{
@@ -43,18 +47,22 @@ namespace flappyBird
 			if (actualScreen == Screen::MENU)
 			{
 				ClearBackground(BLACK);
-				showMainMenu(actualScreen, menuMusic, playButtonSound, rulesButtonSound, 
-					creditsButtonSound);
+				showMainMenu(actualScreen, menuMusic, playButtonSound,
+					rulesButtonSound, creditsButtonSound);
 
 			}
 			else if (actualScreen == Screen::PLAY)
 			{
-				if (playerOne.isDead || playerTwo.isDead)
+				if (gameNeedsInit || playerOne.isDead ||
+					(isMultiplayer && playerTwo.isDead))
 				{
-					initGame(playerOne, playerTwo, obstacles, backGround);
+					initGame(playerOne, playerTwo, obstacles, backGround, isMultiplayer);
+
+					gameNeedsInit = false;
 				}
 
-				playGame(playerOne, playerTwo, obstacles, actualScreen, backGround, gameplayMusic);
+				playGame(playerOne, playerTwo, obstacles, actualScreen,
+					backGround, gameplayMusic, isMultiplayer);
 			}
 			else if (actualScreen == Screen::CREDITS)
 			{
@@ -64,18 +72,23 @@ namespace flappyBird
 			else if (actualScreen == Screen::RULES)
 			{
 				ClearBackground(BLACK);
-				showRules(actualScreen);
+				showRules(actualScreen, isMultiplayer);
+
+				if (actualScreen == Screen::PLAY)
+				{
+					gameNeedsInit = true;
+				}
 			}
 			else if (actualScreen == Screen::GAMEOVER)
 			{
-				DrawGame(backGround, obstacles, playerOne, playerTwo);
+				DrawGame(backGround, obstacles, playerOne, playerTwo, isMultiplayer);
 				DrawTexture(blackBackground, 0, 0, WHITE);
 
-				DrawGameOver(actualScreen);
+				DrawGameOver(actualScreen, isMultiplayer);
 			}
 			else if (actualScreen == Screen::PAUSE)
 			{
-				DrawGame(backGround, obstacles, playerOne, playerTwo);
+				DrawGame(backGround, obstacles, playerOne, playerTwo, isMultiplayer);
 				DrawTexture(blackBackground, 0, 0, WHITE);
 
 			}
@@ -83,18 +96,19 @@ namespace flappyBird
 			{
 				inGame = false;
 			}
-		
+
 			EndDrawing();
 		}
 
 		UnloadMusicStream(menuMusic);
 		UnloadMusicStream(gameplayMusic);
 		unloadBackground(backGround);
+
 		UnloadTexture(playerOne.Bird);
 		UnloadTexture(playerTwo.Bird);
-	
+
 		CloseAudioDevice();
-	
+
 		CloseWindow();
 	}
 }

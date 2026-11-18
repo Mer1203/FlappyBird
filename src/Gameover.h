@@ -4,5 +4,5 @@
 
 namespace flappyBird
 {
-	void DrawGameOver(Screen& actualScreen);
+	void DrawGameOver(Screen& actualScreen, bool isMultiplayer);
 }

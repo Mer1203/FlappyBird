@@ -7,12 +7,12 @@
 namespace flappyBird
 {
     void initGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-        ParallaxBackground& background);
+        ParallaxBackground& background, bool isMultiplayer);
     void playGame(Player& player, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-        Screen& actualScreen, ParallaxBackground& background, Music gameplayMusic);
+        Screen& actualScreen, ParallaxBackground& background, Music gameplayMusic, bool isMultiplayer);
 
     void DrawGame(ParallaxBackground& background, Obstacle obstacles[MAX_OBSTACLES],
-        Player& playerOne, Player& playerTwo);
+        Player& playerOne, Player& playerTwo, bool isMultiplayer);
 
     void checkCollision(Player& player, Pipe& pipe);
     void checkCollision(Player& player, 

@@ -4,6 +4,5 @@
 
 namespace flappyBird
 {
-	void showRules(Screen& actualScreen);
-
+	void showRules(Screen& actualScreen, bool& isMultiplayer);
 }

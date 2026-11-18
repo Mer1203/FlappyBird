@@ -33,10 +33,14 @@ namespace flappyBird
 	}
 
 	void initGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-		ParallaxBackground& background)
+		ParallaxBackground& background, bool isMultiplayer)
 	{
 		playerOne = initPlayerOne();
-		playerTwo = initPlayerTwo();
+
+		if (isMultiplayer)
+		{
+			playerTwo = initPlayerTwo();
+		}
 		
 		for (int i = 0; i < MAX_OBSTACLES; i++)
 		{
@@ -62,13 +66,20 @@ namespace flappyBird
 	}
 
 	void playGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-		Screen& actualScreen, ParallaxBackground& background, Music gameplayMusic)
+		Screen& actualScreen, ParallaxBackground& background, Music gameplayMusic,
+		bool isMultiplayer)
 	{
-		updatePlayer(playerOne, playerTwo);
+		updatePlayer(playerOne, playerTwo, isMultiplayer);
 		moveObstacles(obstacles);
 		updateParallax(background);
+
 		checkCollision(playerOne, obstacles);
-		checkCollision(playerTwo, obstacles);
+
+		if (isMultiplayer)
+		{
+			checkCollision(playerTwo, obstacles);
+		}
+
 		checkIfObstacleLevedScreen(obstacles);
 
 		if (!IsMusicStreamPlaying(gameplayMusic))
@@ -85,9 +96,13 @@ namespace flappyBird
 		//CheckScore(pipe, playerTwo);
 
 		checkIfPlayerDied(playerOne, actualScreen);
-		checkIfPlayerDied(playerTwo, actualScreen);
 
-		DrawGame(background, obstacles, playerOne, playerTwo);
+		if (isMultiplayer)
+		{
+			checkIfPlayerDied(playerTwo, actualScreen);
+		}
+
+		DrawGame(background, obstacles, playerOne, playerTwo, isMultiplayer);
 
 		ClearBackground(BLACK);
 	}
@@ -120,11 +135,11 @@ namespace flappyBird
 	}
 
 	void DrawGame(ParallaxBackground& background, Obstacle obstacles[MAX_OBSTACLES],
-		Player& playerOne, Player& playerTwo)
+		Player& playerOne, Player& playerTwo, bool isMultiplayer)
 	{
 		drawParallax(background);
 		drawObstacles(obstacles);
-		drawPlayer(playerOne, playerTwo);
+		drawPlayer(playerOne, playerTwo, isMultiplayer);
 	}
 	
 

@@ -5,7 +5,7 @@
 
 namespace flappyBird
 {
-	void showRules(Screen& actualScreen)
+    void showRules(Screen& actualScreen, bool& isMultiplayer)
 	{
         const char* titleOne = "             FLAPPY BIRD\n\n";
         const char* rulesText =
@@ -48,19 +48,6 @@ namespace flappyBird
         float rulesX = (static_cast<float>(screenWidth) / 2.0f) - (rulesSize.x / 2.0f);
         float rulesY = 110.0f;
 
-        Button exitButton;
-
-        exitButton.width = 200;
-        exitButton.high = 50;
-        exitButton.x = static_cast<int>((static_cast<float>(screenWidth) / 2.0f) - (exitButton.width / 2.0f));
-        exitButton.y = screenHigh - 80;
-        exitButton.text = "EXIT";
-
-        if (onClick(exitButton))
-        {
-            actualScreen = Screen::MENU;
-        }
-
         DrawTextEx(
             defaultFont,
             titleOne,
@@ -78,6 +65,108 @@ namespace flappyBird
             RAYWHITE
         );
 
+        Button singlePlayerButton;
+        Button multiPlayerButton;
+        Button exitButton;
+
+        singlePlayerButton.width = 200;
+        singlePlayerButton.high = 50;
+        singlePlayerButton.x = (screenWidth / 2) - singlePlayerButton.width - 15;
+        singlePlayerButton.y = screenHigh - 150;
+        singlePlayerButton.text = "SINGLEPLAYER";
+        singlePlayerButton.isSoundPlaying = false;
+
+        multiPlayerButton.width = 200;
+        multiPlayerButton.high = 50;
+        multiPlayerButton.x = (screenWidth / 2) + 15;
+        multiPlayerButton.y = screenHigh - 150;
+        multiPlayerButton.text = "MULTIPLAYER";
+        multiPlayerButton.isSoundPlaying = false;
+
+        exitButton.width = 200;
+        exitButton.high = 50;
+        exitButton.x = (screenWidth / 2) - (exitButton.width / 2);
+        exitButton.y = screenHigh - 80;
+        exitButton.text = "EXIT";
+        exitButton.isSoundPlaying = false;
+
+        if (onClick(singlePlayerButton))
+        {
+            isMultiplayer = false;
+            actualScreen = Screen::PLAY;
+        }
+        else if (onClick(multiPlayerButton))
+        {
+            isMultiplayer = true;
+            actualScreen = Screen::PLAY;
+        }
+        else if (onClick(exitButton))
+        {
+            actualScreen = Screen::MENU;
+        }
+
+        float buttonFontSize = 20.0f;
+
+        DrawRectangle(
+            singlePlayerButton.x,
+            singlePlayerButton.y,
+            singlePlayerButton.width,
+            singlePlayerButton.high,
+            RED
+        );
+
+        Vector2 singleTextSize = MeasureTextEx(
+            defaultFont,
+            singlePlayerButton.text.c_str(),
+            buttonFontSize,
+            spacing
+        );
+
+        DrawTextEx(
+            defaultFont,
+            singlePlayerButton.text.c_str(),
+            {
+                static_cast<float>(singlePlayerButton.x) +
+                (singlePlayerButton.width - singleTextSize.x) / 2.0f,
+
+                static_cast<float>(singlePlayerButton.y) +
+                (singlePlayerButton.high - singleTextSize.y) / 2.0f
+            },
+            buttonFontSize,
+            spacing,
+            RAYWHITE
+        );
+
+        DrawRectangle(
+            multiPlayerButton.x,
+            multiPlayerButton.y,
+            multiPlayerButton.width,
+            multiPlayerButton.high,
+            RED
+        );
+
+        Vector2 multiTextSize = MeasureTextEx(
+            defaultFont,
+            multiPlayerButton.text.c_str(),
+            buttonFontSize,
+            spacing
+        );
+
+        DrawTextEx(
+            defaultFont,
+            multiPlayerButton.text.c_str(),
+            {
+                static_cast<float>(multiPlayerButton.x) +
+                (multiPlayerButton.width - multiTextSize.x) / 2.0f,
+
+                static_cast<float>(multiPlayerButton.y) +
+                (multiPlayerButton.high - multiTextSize.y) / 2.0f
+            },
+            buttonFontSize,
+            spacing,
+            RAYWHITE
+        );
+
         DrawRectangle(
             exitButton.x,
             exitButton.y,
@@ -85,8 +174,6 @@ namespace flappyBird
             exitButton.high,
             RED
         );
-
-        float buttonFontSize = 20.0f;
 
         Vector2 exitTextSize = MeasureTextEx(
             defaultFont,
@@ -99,12 +186,16 @@ namespace flappyBird
             defaultFont,
             exitButton.text.c_str(),
             {
-                static_cast<float>(exitButton.x) + (static_cast<float>(exitButton.width) - exitTextSize.x) / 2.0f,
-                static_cast<float>(exitButton.y) + (static_cast<float>(exitButton.high) - exitTextSize.y) / 2.0f
+                static_cast<float>(exitButton.x) +
+                (exitButton.width - exitTextSize.x) / 2.0f,
+
+                static_cast<float>(exitButton.y) +
+                (exitButton.high - exitTextSize.y) / 2.0f
             },
             buttonFontSize,
             spacing,
             RAYWHITE
         );
+
 	}
 }

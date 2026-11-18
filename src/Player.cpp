@@ -38,23 +38,34 @@ namespace flappyBird
 		return playerTwo;
 	}
 
-	void updatePlayer(Player& playerOne, Player& playerTwo)
+	void updatePlayer(Player& playerOne, Player& playerTwo, bool isMultiplayer)
 	{
 		playerMovement(playerOne, KEY_SPACE);
-		playerMovement(playerTwo, KEY_UP);
+
+		if (isMultiplayer)
+		{
+			playerMovement(playerTwo, KEY_UP);
+		}
 	}
 
-	void drawPlayer(Player playerOne, Player playerTwo)
+	void drawPlayer(Player playerOne, Player playerTwo, bool isMultiplayer)
 	{
-		Vector2 drawPositionOne = {playerOne.position.x - 40, playerOne.position.y - 40};
-		Vector2 drawPositionTwo = { playerTwo.position.x - 40, playerTwo.position.y - 40};
-
+		Vector2 drawPositionOne = { playerOne.position.x - 40, playerOne.position.y - 40 };
 		DrawTextureEx(playerOne.Bird, drawPositionOne, 0, 0.1f, WHITE);
-		DrawTextureEx(playerTwo.Bird, drawPositionTwo, 0, 0.1f, WHITE);
+
+		if (isMultiplayer)
+		{
+			Vector2 drawPositionTwo = { playerTwo.position.x - 40, playerTwo.position.y - 40 };
+			DrawTextureEx(playerTwo.Bird, drawPositionTwo, 0, 0.1f, WHITE);
+		}
 
 #ifdef _DEBUG
 		DrawRectangleV(playerOne.position, playerOne.size, BLUE);
-		DrawRectangleV(playerTwo.position, playerTwo.size, VIOLET);
+
+		if (isMultiplayer)
+		{
+			DrawRectangleV(playerTwo.position, playerTwo.size, VIOLET);
+		}
 #endif
 	}
 

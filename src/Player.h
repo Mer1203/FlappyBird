@@ -19,7 +19,7 @@ namespace flappyBird
 
 	Player initPlayerOne();
 	Player initPlayerTwo();
-	void updatePlayer(Player& player, Player& playerTwo);
+	void updatePlayer(Player& player, Player& playerTwo, bool isMultiplayer);
 	void playerMovement(Player& player, KeyboardKey key);
-	void drawPlayer(Player player, Player playerTwo);
+	void drawPlayer(Player player, Player playerTwo, bool isMultiplayer);
 }

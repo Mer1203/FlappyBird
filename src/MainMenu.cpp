@@ -58,7 +58,7 @@ namespace flappyBird
 				playButton.isSoundPlaying = false;
 			}
 
-			actualScreen = Screen::PLAY;
+			actualScreen = Screen::RULES;
 		}
 		else if (onClick(creditsButton))
 		{
