@@ -8,7 +8,7 @@ namespace flappyBird
 		none = 0,
 		MAIN_MENU,
 		PLAY,
-		HOW_PLAY,
+		RULES,
 		CREDITS,
 		LOOSE,
 		PAUSE,

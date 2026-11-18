@@ -13,6 +13,7 @@ namespace flappyBird
 		// 2. Configuración de botones
 		Button playButton;
 		Button creditsButton;
+		Button rulesButton;
 		Button exitButton;
 
 		float sw = static_cast<float>(GetScreenWidth());
@@ -41,7 +42,7 @@ namespace flappyBird
 		float title2X = (sw / 2.0f) - (title2Size.x / 2.0f);
 		float title2Y = titleY + titleSize.y + 10.0f;
 
-		ButtonInit(playButton, creditsButton, exitButton);
+		ButtonInit(playButton, creditsButton, exitButton, rulesButton);
 
 		if (onClick(playButton))
 		{
@@ -115,6 +116,20 @@ namespace flappyBird
 			RAYWHITE
 		);
 
+		DrawRectangle(rulesButton.x, rulesButton.y, rulesButton.width, rulesButton.high, RED);
+		Vector2 rulesTextSize = MeasureTextEx(defaultFont, rulesButton.text.c_str(), buttonFontSize, spacing);
+		DrawTextEx(
+			defaultFont,
+			exitButton.text.c_str(),
+			{
+				static_cast<float>(rulesButton.x) + (rulesButton.width - rulesTextSize.x) / 2.0f,
+				static_cast<float>(rulesButton.y) + (rulesButton.high - rulesTextSize.y) / 2.0f
+			},
+			buttonFontSize,
+			spacing,
+			RAYWHITE
+		);
+
 		DrawRectangle(exitButton.x, exitButton.y, exitButton.width, exitButton.high, RED);
 		Vector2 exitTextSize = MeasureTextEx(defaultFont, exitButton.text.c_str(), buttonFontSize, spacing);
 		DrawTextEx(
@@ -128,7 +143,6 @@ namespace flappyBird
 			spacing,
 			RAYWHITE
 		);
-
 
 		DrawTextEx(defaultFont, title, { titleX, titleY }, titleFontSize, spacing, RED);
 		DrawTextEx(defaultFont, title2, { title2X, title2Y }, title2FontSize, spacing, YELLOW);

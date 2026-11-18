@@ -17,6 +17,6 @@ namespace flappyBird
 	};
 
 	bool onClick(Button button);
-	void ButtonInit(Button& playButton, 
-		Button& creditsButton, Button& exitButton);
+	void ButtonInit(Button& playButton, Button& creditsButton,
+		Button& exitButton, Button& rulesButton);
 }

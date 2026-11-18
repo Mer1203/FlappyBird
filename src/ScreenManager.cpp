@@ -54,6 +54,11 @@ namespace flappyBird
 				ClearBackground(BLACK);
 				showCredits(actualScreen);
 			}
+			else if (actualScreen == Screen::RULES)
+			{
+				ClearBackground(BLACK);
+				showCredits(actualScreen);
+			}
 			else if (actualScreen == Screen::EXIT)
 			{
 				inGame = false;

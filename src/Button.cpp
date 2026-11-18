@@ -21,7 +21,8 @@ namespace flappyBird
 		return false;
 	}
 
-	void ButtonInit(Button& playButton, Button& creditsButton, Button& exitButton)
+	void ButtonInit(Button& playButton, Button& creditsButton, 
+		Button& exitButton, Button& rulesButton)
 	{
 		float sw = static_cast<float>(GetScreenWidth());
 		float sh = static_cast<float>(GetScreenHeight());
@@ -40,10 +41,17 @@ namespace flappyBird
 		creditsButton.text = "CREDITS";
 		creditsButton.isSoundPlaying = false;
 
+		rulesButton.width = 200;
+		rulesButton.high = 50;
+		rulesButton.x = static_cast<int>(sw / 2.0f - rulesButton.width / 2.0f);
+		rulesButton.y = static_cast<int>(creditsButton.y + creditsButton.high + buttonsOffset);
+		rulesButton.text = "RULES";
+		rulesButton.isSoundPlaying = false;
+
 		exitButton.width = 200;
 		exitButton.high = 50;
 		exitButton.x = static_cast<int>(sw / 2.0f - exitButton.width / 2.0f);
-		exitButton.y = static_cast<int>(creditsButton.y + creditsButton.high + buttonsOffset);
+		exitButton.y = static_cast<int>(rulesButton.y + rulesButton.high + buttonsOffset);
 		exitButton.text = "EXIT";
 		exitButton.isSoundPlaying = false;
 	}
