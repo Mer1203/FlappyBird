@@ -13,7 +13,10 @@ namespace flappyBird
 		int width;
 		int high;
 		std::string text;
+		bool isSoundPlaying;
 	};
 
 	bool onClick(Button button);
+	void ButtonInit(Button& playButton, 
+		Button& creditsButton, Button& exitButton);
 }
