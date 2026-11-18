@@ -23,6 +23,7 @@
     <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\Credits.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Gameover.h" />
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\Pipe.h" />
     <ClInclude Include="src\Player.h" />
@@ -35,6 +36,7 @@
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Credits.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Gameover.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Pipe.cpp" />

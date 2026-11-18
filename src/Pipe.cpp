@@ -1,6 +1,7 @@
 #include "Pipe.h"
 
 #include <iostream>
+#include "Player.h"
 
 namespace flappyBird
 {
@@ -86,6 +87,14 @@ namespace flappyBird
 			{
 				drawPipe(obstacles[i].pipes[j]);
 			}
+		}
+	}
+
+	void CheckScore(Pipe pipe, Player& player)
+	{
+		if ((pipe.position.x + pipe.size.x) == (player.position.x + player.size.x))
+		{
+			player.score += 1;
 		}
 	}
 

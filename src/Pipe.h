@@ -1,6 +1,7 @@
 #pragma once
 
 #include <raylib.h>
+#include "Player.h"
 
 namespace flappyBird
 {
@@ -17,7 +18,6 @@ namespace flappyBird
 	{
 		Vector2 position;
 		Vector2 size;
-		//Texture2D pipe;
 	};
 
 	struct Obstacle
@@ -39,4 +39,5 @@ namespace flappyBird
 
 	void drawObstacles(Obstacle obstacles[MAX_OBSTACLES]);
 
+	void CheckScore(Pipe pipe, Player& player);
 }

@@ -9,6 +9,7 @@ namespace flappyBird
 		float velY;
 		float jumpForce;
 		float velocity;
+		float score;
 		bool isDead;
 		Texture2D Bird;
 	};

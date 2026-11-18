@@ -58,7 +58,7 @@ namespace flappyBird
 
         if (onClick(exitButton))
         {
-            actualScreen = Screen::MAIN_MENU;
+            actualScreen = Screen::MENU;
         }
 
         DrawTextEx(

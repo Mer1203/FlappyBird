@@ -71,7 +71,7 @@ namespace flappyBird
 		background.scrollingFore = 0.0f;
 	}
 
-	void playGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES], 
+	void playGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
 		Screen& actualScreen, ParallaxBackground& background)
 	{
 		updatePlayer(playerOne, playerTwo);
@@ -80,14 +80,16 @@ namespace flappyBird
 		checkCollision(playerOne, obstacles);
 		checkCollision(playerTwo, obstacles);
 		checkIfObstacleLevedScreen(obstacles);
+
+		//CheckScore(pipe, playerOne);
+		//CheckScore(pipe, playerTwo);
+
 		checkIfPlayerDied(playerOne, actualScreen);
 		checkIfPlayerDied(playerTwo, actualScreen);
 
-		ClearBackground(BLACK);
+		DrawGame(background, obstacles, playerOne, playerTwo);
 
-		drawParallax(background);
-		drawObstacles(obstacles);
-		drawPlayer(playerOne, playerTwo);
+		ClearBackground(BLACK);
 	}
 
 	void checkIfObstacleLevedScreen(Obstacle& obstacle)
@@ -100,6 +102,7 @@ namespace flappyBird
 			obstacle.pipes[1] = initPipeBottom(newPosX, obstacle.pipes[0].position.y);
 		}
 	}
+
 	void checkIfObstacleLevedScreen(Obstacle obstacles[MAX_OBSTACLES])
 	{
 		for (int i = 0; i < MAX_OBSTACLES; i++)
@@ -112,7 +115,21 @@ namespace flappyBird
 	{
 		if (player.isDead)
 		{
-			actualScreen = Screen::MAIN_MENU;
+			actualScreen = Screen::GAMEOVER;
 		}
 	}
+
+	void DrawGame(ParallaxBackground& background, Obstacle obstacles[MAX_OBSTACLES],
+		Player& playerOne, Player& playerTwo)
+	{
+		drawParallax(background);
+		drawObstacles(obstacles);
+		drawPlayer(playerOne, playerTwo);
+	}
+	
+
+	/*void PointsPlayer()
+	{
+		const char* titleOne = "Player 1 Score:\n\n";
+	}*/
 }

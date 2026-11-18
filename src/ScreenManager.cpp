@@ -6,6 +6,8 @@
 #include "Credits.h"
 #include "Game.h"
 #include "Rules.h"
+#include "Pipe.h"
+#include "Gameover.h"
 
 namespace flappyBird
 {
@@ -14,12 +16,13 @@ namespace flappyBird
 		InitWindow(1024, 768, "Floppy:El Pajaro que Vuela Remaster Editon");
 		InitAudioDevice();
 
-		Screen actualScreen = Screen::MAIN_MENU;
+		Screen actualScreen = Screen::MENU;
 		Player playerOne;
 		Player playerTwo;
 		bool inGame = true;
 		Obstacle obstacles[MAX_OBSTACLES];
 		ParallaxBackground backGround = { 0 };
+		Texture2D blackBackground = LoadTexture("res/Black_Background.png");
 
 		//MUSICA:
 		Music menuMusic = LoadMusicStream("res/Sounds/musica-elevador-short.mp3");
@@ -37,7 +40,7 @@ namespace flappyBird
 			SetMasterVolume(0.3f);
 
 			BeginDrawing();
-			if (actualScreen == Screen::MAIN_MENU)
+			if (actualScreen == Screen::MENU)
 			{
 				ClearBackground(BLACK);
 				showMainMenu(actualScreen, menuMusic, playButtonSound, rulesButtonSound, 
@@ -63,6 +66,19 @@ namespace flappyBird
 				ClearBackground(BLACK);
 				showRules(actualScreen);
 			}
+			else if (actualScreen == Screen::GAMEOVER)
+			{
+				DrawGame(backGround, obstacles, playerOne, playerTwo);
+				DrawTexture(blackBackground, 0, 0, WHITE);
+
+				DrawGameOver();
+			}
+			else if (actualScreen == Screen::PAUSE)
+			{
+				DrawGame(backGround, obstacles, playerOne, playerTwo);
+				DrawTexture(blackBackground, 0, 0, WHITE);
+
+			}
 			else if (actualScreen == Screen::EXIT)
 			{
 				inGame = false;
@@ -71,12 +87,14 @@ namespace flappyBird
 			EndDrawing();
 		}
 
-		CloseAudioDevice();
 		UnloadMusicStream(menuMusic);
 		UnloadMusicStream(gameplayMusic);
 		unloadBackground(backGround);
 		UnloadTexture(playerOne.Bird);
 		UnloadTexture(playerTwo.Bird);
+	
+		CloseAudioDevice();
+	
 		CloseWindow();
 	}
 }

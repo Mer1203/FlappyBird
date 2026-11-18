@@ -46,7 +46,7 @@ namespace flappyBird
         // Comprueba si se hizo clic en el botón EXIT
         if (onClick(exitButton))
         {
-            actualScreen = Screen::MAIN_MENU;
+            actualScreen = Screen::MENU;
         }
 
         // 3. Dibujado de los elementos en pantalla

@@ -11,6 +11,9 @@ namespace flappyBird
     void playGame(Player& player, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
         Screen& actualScreen, ParallaxBackground& background);
 
+    void DrawGame(ParallaxBackground& background, Obstacle obstacles[MAX_OBSTACLES],
+        Player& playerOne, Player& playerTwo);
+
     void checkCollision(Player& player, Pipe& pipe);
     void checkCollision(Player& player, 
         Obstacle obstacles[MAX_OBSTACLES]);
