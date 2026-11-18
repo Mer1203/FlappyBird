@@ -7,9 +7,9 @@
 namespace flappyBird
 {
     void initGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-        ParallaxBackground& background, Music gameplayMusic);
+        ParallaxBackground& background);
     void playGame(Player& player, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-        Screen& actualScreen, ParallaxBackground& background);
+        Screen& actualScreen, ParallaxBackground& background, Music gameplayMusic);
 
     void DrawGame(ParallaxBackground& background, Obstacle obstacles[MAX_OBSTACLES],
         Player& playerOne, Player& playerTwo);

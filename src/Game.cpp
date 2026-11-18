@@ -33,21 +33,11 @@ namespace flappyBird
 	}
 
 	void initGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-		ParallaxBackground& background, Music gameplayMusic)
+		ParallaxBackground& background)
 	{
 		playerOne = initPlayerOne();
 		playerTwo = initPlayerTwo();
-
-		if (!IsMusicStreamPlaying(gameplayMusic))
-		{
-			SetMusicVolume(gameplayMusic, 1.0f);
-			PlayMusicStream(gameplayMusic);
-		}
-		else
-		{
-			UpdateMusicStream(gameplayMusic);
-		}
-
+		
 		for (int i = 0; i < MAX_OBSTACLES; i++)
 		{
 			obstacles[i] = createObstacles(i);
@@ -72,7 +62,7 @@ namespace flappyBird
 	}
 
 	void playGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
-		Screen& actualScreen, ParallaxBackground& background)
+		Screen& actualScreen, ParallaxBackground& background, Music gameplayMusic)
 	{
 		updatePlayer(playerOne, playerTwo);
 		moveObstacles(obstacles);
@@ -80,6 +70,16 @@ namespace flappyBird
 		checkCollision(playerOne, obstacles);
 		checkCollision(playerTwo, obstacles);
 		checkIfObstacleLevedScreen(obstacles);
+
+		if (!IsMusicStreamPlaying(gameplayMusic))
+		{
+			SetMusicVolume(gameplayMusic, 1.0f);
+			PlayMusicStream(gameplayMusic);
+		}
+		else
+		{
+			UpdateMusicStream(gameplayMusic);
+		}
 
 		//CheckScore(pipe, playerOne);
 		//CheckScore(pipe, playerTwo);

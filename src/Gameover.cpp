@@ -33,7 +33,7 @@ namespace flappyBird
 		);
 
 		const char* playerOneText = "Player 1 Score: \n\n";
-		float playerOneFontSize = 60.0f;
+		float playerOneFontSize = 50.0f;
 
 		Vector2 playerOneTextSize = MeasureTextEx(
 			defaultFont,
@@ -42,7 +42,7 @@ namespace flappyBird
 			spacing
 		);
 
-		float playerOneTextX = (static_cast<float>(screenWidth) / 4.0f) - (titleSize.x / 2.0f);
+		float playerOneTextX = (static_cast<float>(screenWidth) / 3.0f) - (titleSize.x / 2.0f);
 		float playerOneTextY = 350.0f;
 
 		DrawTextEx(
@@ -55,7 +55,7 @@ namespace flappyBird
 		);
 
 		const char* playerTwoText = "Player 2 Score: \n\n";
-		float playerTwoFontSize = 60.0f;
+		float playerTwoFontSize = 50.0f;
 
 		Vector2 playerTwoTextSize = MeasureTextEx(
 			defaultFont,
@@ -64,7 +64,7 @@ namespace flappyBird
 			spacing
 		);
 
-		float playerTwoTextX = (static_cast<float>(screenWidth) / 4.0f) - (titleSize.x / 2.0f);
+		float playerTwoTextX = (static_cast<float>(screenWidth) / 3.0f) - (titleSize.x / 2.0f);
 		float playerTwoTextY = 430.0f;
 
 		DrawTextEx(
