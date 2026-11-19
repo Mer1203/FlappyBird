@@ -179,6 +179,6 @@ namespace flappyBird
 		DrawTextEx(defaultFont, title, { titleX, titleY }, titleFontSize, spacing, RED);
 		DrawTextEx(defaultFont, title2, { title2X, title2Y }, title2FontSize, spacing, YELLOW);
 
-		DrawText("v0.4", 20, 20, 30, WHITE);
+		DrawText("v1.0", 20, 20, 30, WHITE);
 	}
 }
