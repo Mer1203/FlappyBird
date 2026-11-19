@@ -92,8 +92,12 @@ namespace flappyBird
 			UpdateMusicStream(gameplayMusic);
 		}
 
-		//CheckScore(pipe, playerOne);
-		//CheckScore(pipe, playerTwo);
+		CheckScore(obstacles, playerOne, false);
+
+		if (isMultiplayer)
+		{
+			CheckScore(obstacles, playerTwo, true);
+		}
 
 		checkIfPlayerDied(playerOne, actualScreen);
 
@@ -115,6 +119,9 @@ namespace flappyBird
 			newPosX = obstacle.pipes[0].position.x + (MAX_OBSTACLES * OBSTACLE_SPACING);
 			obstacle.pipes[0] = initPipeTop(newPosX);
 			obstacle.pipes[1] = initPipeBottom(newPosX, obstacle.pipes[0].position.y);
+		
+			obstacle.scoredPlayerOne = false;
+			obstacle.scoredPlayerTwo = false;
 		}
 	}
 
@@ -140,6 +147,25 @@ namespace flappyBird
 		drawParallax(background);
 		drawObstacles(obstacles);
 		drawPlayer(playerOne, playerTwo, isMultiplayer);
+
+		DrawText(
+			TextFormat("PLAYER 1: %i", (int)playerOne.score),
+			30,
+			30,
+			30,
+			WHITE
+		);
+
+		if (isMultiplayer)
+		{
+			DrawText(
+				TextFormat("PLAYER 2: %i", (int)playerTwo.score),
+				750,
+				30,
+				30,
+				WHITE
+			);
+		}
 	}
 	
 

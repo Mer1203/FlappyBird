@@ -84,7 +84,7 @@ namespace flappyBird
 				DrawGame(backGround, obstacles, playerOne, playerTwo, isMultiplayer);
 				DrawTexture(blackBackground, 0, 0, WHITE);
 
-				DrawGameOver(actualScreen, isMultiplayer);
+				DrawGameOver(actualScreen, isMultiplayer, playerOne, playerTwo);
 			}
 			else if (actualScreen == Screen::PAUSE)
 			{

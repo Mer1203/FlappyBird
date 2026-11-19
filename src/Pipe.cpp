@@ -90,12 +90,37 @@ namespace flappyBird
 		}
 	}
 
-	void CheckScore(Pipe pipe, Player& player)
+	void CheckScore(Obstacle obstacles[MAX_OBSTACLES],
+		Player& player, bool isPlayerTwo)
 	{
-		if ((pipe.position.x + pipe.size.x) == (player.position.x + player.size.x))
+		for (int i = 0; i < MAX_OBSTACLES; i++)
 		{
-			player.score += 1;
+			bool alreadyScored = false;
+
+			if (isPlayerTwo)
+			{
+				alreadyScored = obstacles[i].scoredPlayerTwo;
+			}
+			else
+			{
+				alreadyScored = obstacles[i].scoredPlayerOne;
+			}
+
+			if (!alreadyScored &&
+				obstacles[i].pipes[0].position.x +
+				obstacles[i].pipes[0].size.x < player.position.x)
+			{
+				player.score += 1;
+
+				if (isPlayerTwo)
+				{
+					obstacles[i].scoredPlayerTwo = true;
+				}
+				else
+				{
+					obstacles[i].scoredPlayerOne = true;
+				}
+			}
 		}
 	}
-
 }

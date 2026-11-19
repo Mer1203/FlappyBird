@@ -5,7 +5,8 @@
 
 namespace flappyBird
 {
-	void DrawGameOver(Screen& actualScreen, bool isMultiplayer)
+	void DrawGameOver(Screen& actualScreen, bool isMultiplayer,
+		Player& playerOne, Player& playerTwo)
 	{
 		const char* titleOne = "GAME OVER\n\n";
 		float titleFontSize = 80.0f;
@@ -32,52 +33,72 @@ namespace flappyBird
 			RED
 		);
 
-		const char* playerOneText = "Player 1 Score: \n\n";
-		float playerOneFontSize = 50.0f;
+		const char* playerOneText = TextFormat(
+			"Player 1 Score: %i",
+			(int)playerOne.score
+		);
+
+		float playerFontSize = 35.0f;
 
 		Vector2 playerOneTextSize = MeasureTextEx(
 			defaultFont,
-			titleOne,
-			titleFontSize,
+			playerOneText,
+			playerFontSize,
 			spacing
 		);
 
-		float playerOneTextX = (static_cast<float>(screenWidth) / 3.0f) - (titleSize.x / 2.0f);
-		float playerOneTextY = 350.0f;
+		float playerOneTextX;
+
+		if (isMultiplayer)
+		{
+			playerOneTextX = (screenWidth / 4.0f) -
+				(playerOneTextSize.x / 2.0f);
+		}
+		else
+		{
+			playerOneTextX = (screenWidth / 2.0f) -
+				(playerOneTextSize.x / 2.0f);
+		}
+
+		float playerTextY = 380.0f;
 
 		DrawTextEx(
 			defaultFont,
 			playerOneText,
-			{ playerOneTextX, playerOneTextY },
-			playerOneFontSize,
+			{ playerOneTextX, playerTextY },
+			playerFontSize,
 			spacing,
 			WHITE
 		);
 
 		if (isMultiplayer)
 		{
-			const char* playerTwoText = "Player 2 Score: \n\n";
-			float playerTwoFontSize = 50.0f;
+			const char* playerTwoText = TextFormat(
+				"Player 2 Score: %i",
+				(int)playerTwo.score
+			);
 
 			Vector2 playerTwoTextSize = MeasureTextEx(
 				defaultFont,
-				titleOne,
-				titleFontSize,
+				playerTwoText,
+				playerFontSize,
 				spacing
 			);
 
-			float playerTwoTextX = (static_cast<float>(screenWidth) / 3.0f) - (titleSize.x / 2.0f);
-			float playerTwoTextY = 430.0f;
+			float playerTwoTextX =
+				(3.0f * screenWidth / 4.0f) -
+				(playerTwoTextSize.x / 2.0f);
 
 			DrawTextEx(
 				defaultFont,
 				playerTwoText,
-				{ playerTwoTextX, playerTwoTextY },
-				playerTwoFontSize,
+				{ playerTwoTextX, playerTextY },
+				playerFontSize,
 				spacing,
 				WHITE
 			);
 		}
+
 
 		Button tryAgainButton;
 		Button returnMenuButton;

@@ -22,6 +22,9 @@ namespace flappyBird
 	struct Obstacle
 	{
 		Pipe pipes[2];
+
+		bool scoredPlayerOne = false;
+		bool scoredPlayerTwo = false;
 	};
 
 	Pipe initPipeTop(float posX);
@@ -38,5 +41,6 @@ namespace flappyBird
 
 	void drawObstacles(Obstacle obstacles[MAX_OBSTACLES]);
 
-	void CheckScore(Pipe pipe, Player& player);
+	void CheckScore(Obstacle obstacles[MAX_OBSTACLES],
+		Player& player, bool isPlayerTwo);
 }

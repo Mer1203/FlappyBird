@@ -16,6 +16,7 @@ namespace flappyBird
 		playerOne.size.y = 40;
 		playerOne.jumpForce = 300.0f;
 		playerOne.velocity = 0.0f;
+		playerOne.score = 0;
 		playerOne.isDead = false;
 		playerOne.Bird = LoadTexture("res/Bird1.png");
 
@@ -32,6 +33,7 @@ namespace flappyBird
 		playerTwo.size.y = 40;
 		playerTwo.jumpForce = 300.0f;
 		playerTwo.velocity = 0.0f;
+		playerTwo.score = 0;
 		playerTwo.isDead = false;
 		playerTwo.Bird = LoadTexture("res/Bird2.png");
 
