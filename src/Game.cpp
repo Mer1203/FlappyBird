@@ -41,7 +41,7 @@ namespace flappyBird
 		{
 			playerTwo = initPlayerTwo();
 		}
-		
+
 		for (int i = 0; i < MAX_OBSTACLES; i++)
 		{
 			obstacles[i] = createObstacles(i);
@@ -67,7 +67,7 @@ namespace flappyBird
 
 	void playGame(Player& playerOne, Player& playerTwo, Obstacle obstacles[MAX_OBSTACLES],
 		Screen& actualScreen, ParallaxBackground& background, Music gameplayMusic,
-		bool isMultiplayer)
+		bool isMultiplayer, Sound gameoverSound)
 	{
 		updatePlayer(playerOne, playerTwo, isMultiplayer);
 		moveObstacles(obstacles);
@@ -99,11 +99,11 @@ namespace flappyBird
 			CheckScore(obstacles, playerTwo, true);
 		}
 
-		checkIfPlayerDied(playerOne, actualScreen);
+		checkIfPlayerDied(playerOne, actualScreen, gameoverSound);
 
 		if (isMultiplayer)
 		{
-			checkIfPlayerDied(playerTwo, actualScreen);
+			checkIfPlayerDied(playerTwo, actualScreen, gameoverSound);
 		}
 
 		DrawGame(background, obstacles, playerOne, playerTwo, isMultiplayer);
@@ -119,7 +119,7 @@ namespace flappyBird
 			newPosX = obstacle.pipes[0].position.x + (MAX_OBSTACLES * OBSTACLE_SPACING);
 			obstacle.pipes[0] = initPipeTop(newPosX);
 			obstacle.pipes[1] = initPipeBottom(newPosX, obstacle.pipes[0].position.y);
-		
+
 			obstacle.scoredPlayerOne = false;
 			obstacle.scoredPlayerTwo = false;
 		}
@@ -133,11 +133,27 @@ namespace flappyBird
 		}
 	}
 
-	void checkIfPlayerDied(Player& player, Screen& actualScreen)
+	void checkIfPlayerDied(Player& player, Screen& actualScreen, Sound gameoverSound)
 	{
+		bool isSoundPlaying = false;
+
 		if (player.isDead)
 		{
 			actualScreen = Screen::GAMEOVER;
+
+			if (!isSoundPlaying)
+			{
+				if (!IsSoundPlaying(gameoverSound))
+				{
+					SetSoundVolume(gameoverSound, 0.8f);
+					PlaySound(gameoverSound);
+					isSoundPlaying = true;
+				}
+			}
+			else
+			{
+				isSoundPlaying = false;
+			}
 		}
 	}
 
@@ -167,7 +183,7 @@ namespace flappyBird
 			);
 		}
 	}
-	
+
 
 	/*void PointsPlayer()
 	{

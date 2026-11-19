@@ -5,7 +5,8 @@
 namespace flappyBird
 {
 	void showMainMenu(Screen& actualScreen, Music menuMusic, 
-		Sound playButtonSound, Sound rulesButtonSound, Sound creditsButtonSound)
+		Sound playButtonSound, Sound rulesButtonSound, 
+		Sound creditsButtonSound, Sound exitButtonSound)
 	{
 		Font defaultFont = GetFontDefault();
 
@@ -100,6 +101,20 @@ namespace flappyBird
 		}
 		else if (onClick(exitButton))
 		{
+			if (!exitButton.isSoundPlaying)
+			{
+				if (!IsSoundPlaying(exitButtonSound))
+				{
+					SetSoundVolume(exitButtonSound, 5.0f);
+					PlaySound(exitButtonSound);
+					exitButton.isSoundPlaying = true;
+				}
+			}
+			else
+			{
+				exitButton.isSoundPlaying = false;
+			}
+
 			actualScreen = Screen::EXIT;
 		}
 

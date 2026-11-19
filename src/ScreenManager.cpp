@@ -36,6 +36,8 @@ namespace flappyBird
 		Sound playButtonSound = LoadSound("res/Sounds/mercadopago-transferencia-ok.mp3");
 		Sound creditsButtonSound = LoadSound("res/Sounds/anime-wow-sound-effect.mp3");
 		Sound rulesButtonSound = LoadSound("res/Sounds/discord-user-joined-sound-effect.mp3");
+		Sound exitButtonSound = LoadSound("res/Sounds/y2mate_VKI8qDn.mp3");
+		Sound gameoverSound = LoadSound("res/Sounds/metal-pipe-clang.mp3");
 
 		initGame(playerOne, playerTwo, obstacles, backGround, isMultiplayer);
 
@@ -48,7 +50,7 @@ namespace flappyBird
 			{
 				ClearBackground(BLACK);
 				showMainMenu(actualScreen, menuMusic, playButtonSound,
-					rulesButtonSound, creditsButtonSound);
+					rulesButtonSound, creditsButtonSound, exitButtonSound);
 
 			}
 			else if (actualScreen == Screen::PLAY)
@@ -62,7 +64,7 @@ namespace flappyBird
 				}
 
 				playGame(playerOne, playerTwo, obstacles, actualScreen,
-					backGround, gameplayMusic, isMultiplayer);
+					backGround, gameplayMusic, isMultiplayer, gameoverSound);
 			}
 			else if (actualScreen == Screen::CREDITS)
 			{
@@ -102,6 +104,10 @@ namespace flappyBird
 
 		UnloadMusicStream(menuMusic);
 		UnloadMusicStream(gameplayMusic);
+		UnloadSound(playButtonSound);
+		UnloadSound(creditsButtonSound);
+		UnloadSound(rulesButtonSound);
+		UnloadSound(gameoverSound);
 		unloadBackground(backGround);
 
 		UnloadTexture(playerOne.Bird);
